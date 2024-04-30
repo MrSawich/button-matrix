@@ -1,14 +1,13 @@
+=====================
 Матричная клавиатура
-==============
+=====================
 
-The collection of the tools to bild global and regional distribution of any 
-parameter that can be plotted over the globe (latitude-longitude section) 
-or versus height (for example latitude-height and latitude-height section).
-The plots include important features such as terminator line, subsolar point,
-geomagnetic equator etc.
+В этом уроке мы создадим матричную клавиатуру с помощью Arduino UNO. Матричная клавиатура - это тип клавиатуры, в которой кнопки соединены в матрицу из рядов и столбцов. Это эффективный способ подключения нескольких кнопок к Arduino с использованием минимального количества пинов. Для выполнения работы мы будем использовать сайт https://www.tinkercad.com , который имеет инструментарий для работы платы микроконтроллера Arduino UNO, но если у вас есть набор-комплект Ардуино вы можете собрать его самостоятельно по этому уроку. Для работы на сайте вам понадобиться
 
-Features
---------
+1. Зарегестрироваться на сайте
+
+Компоненты
+----------
 
 * Global data plot
 
