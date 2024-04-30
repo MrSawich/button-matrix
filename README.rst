@@ -9,10 +9,15 @@
 .. image:: tinker/1.jpg
     :alt: Global map with sparse data
     :width: 600
-.. image:: tinker/1.jpg
+.. image:: tinker/2.jpg
     :alt: Global map with sparse data
     :width: 600
 
+2. Создать проект 
+
+.. image:: tinker/3.jpg
+    :alt: Global map with sparse data
+    :width: 600
 
 Компоненты
 ----------
