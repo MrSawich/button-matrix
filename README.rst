@@ -6,6 +6,14 @@
 
 1. Зарегестрироваться на сайте
 
+.. image:: tinker/1.jpg
+    :alt: Global map with sparse data
+    :width: 600
+.. image:: tinker/1.jpg
+    :alt: Global map with sparse data
+    :width: 600
+
+
 Компоненты
 ----------
 
