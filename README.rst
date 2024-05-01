@@ -7,7 +7,7 @@
 Введение
 ---------
 
-Для работы на сайте вам понадобиться зарегестрироваться на сайте и создать новый проект.
+Для работы на сайте вам понадобиться зарегистрироваться на сайте и создать новый проект.
 
 .. image:: tinker/1.jpg
     :alt: Global map with sparse data
@@ -38,7 +38,7 @@
 Подключите строки клавиатуры (Row 1 - Row 4) к пинам цифрового вывода Arduino, например, к пинам 8, 9, 10, 11.
 Подключите столбцы клавиатуры (Column 1 - Column 4) к пинам входа Arduino, например, к пинам 4, 5, 6, 7.
 
-.. image:: tinker/6.jpg
+.. image:: tinker/6.png
     :alt: Global map with sparse data
     :width: 600
 
@@ -46,77 +46,93 @@
 
 Для обработки нажатий клавиш и определения, какая кнопка была нажата, можно использовать библиотеку Keypad для Arduino. Эта библиотека упрощает процесс считывания и интерпретации нажатий клавиш в матричной клавиатуре.
 
-В целом, схема матричной клавиатуры 4x4 для Arduino UNO позволяет эффективно подключать и считывать несколько кнопок, что делает ее популярным выбором для проектов, требующих ввода пользователя.
+Код программы
+--------------
+Чтобы начать писать код для подключение сменим во вкладке "Code" режим с "Bloks" на режим "Text"
 
-Компоненты
-----------
+Подключим библиотеку "Keypad" и объявим две переменные наших столбцов и строк
 
-* Global data plot
+.. code-block:: cpp
 
-.. image:: docs/img/global_sparse.png
-    :alt: Global map with sparse data
-    :width: 600
+   #include <Keypad.h>
+    const byte ROWS = 4;
+    const byte COLS = 4;
 
-* Global map plot
+Также нам нужно создать двумерный массив, назвоём его keys. Этот массив используется для сопоставления нажатых клавиш с их соответствующими символами. Когда вы считываете нажатие клавиши с клавиатуры, вы можете использовать этот массив, чтобы определить, какой символ соответствует данной кнопке.
 
-.. image:: docs/img/global_regular.png
-    :alt: Global map on regular grid
-    :width: 600
+.. code-block:: cpp
 
-* Regional data plot
+    char keys[ROWS][COLS] = {
+    {'1', '2', '3', 'A'},
+    {'4', '5', '6', 'B'},
+    {'7', '8', '9', 'C'},
+    {'*', '0', '#', 'D'}
+    };
 
-.. image:: docs/img/regional_sparse.png
-    :width: 600
-    :alt: Regional map with sparse data 
+Определим ещё два массива rowPins и colPins
 
-* Distance-time plot (under development)
+.. code-block:: cpp
 
-.. image:: docs/img/distance_time.png
-    :width: 600
-    :alt: Distance time plot
+    byte rowPins[ROWS] = {8, 9, 10, 11};
+    byte colPins[COLS] = {4, 5, 6, 7};
 
-* `Round Earth projection <https://github.com/gnss-lab/simurg_plotter/blob/master/scripts/plot_sphere.py>`_ (under development)
+Эти массивы используются для настройки клавиатуры и указания Arduino, какие пины используются для считывания нажатий клавиш. Библиотека Keypad использует эту информацию для сканирования строк и столбцов, чтобы определить, какая кнопка была нажата.
 
-.. image:: docs/img/round_earth_projection.png
-   :width: 400
-   :alt: Animation plots
+Создадим экземпляр класса Keypad и инициализируем его с помощью заданных параметров.
 
-* `Animation plots <https://github.com/gnss-lab/simurg_plotter/blob/master/scripts/animate_sphere.py>`_ (under development)
+.. code-block:: cpp
 
-.. image:: docs/gif/animation_plots.gif
-   :width: 400
-   :alt: Animation plots
+    Keypad matrix = Keypad(makeKeymap(keys), rowPins, colPins, ROWS, COLS);
 
-Installation
-------------
+В функции setup() мы инициализируем связь с монитором последовательного порта и начинаем работу с клавиатурой.
 
-Make virtual environment with conda (optional):
+.. code-block:: cpp
 
-.. code-block:: bash
+    void setup() {
+    Serial.begin(9600);
+    keypad.begin(makeKeymap(keys));
+    }
 
-    conda create -n simurg_plotter python=3.10
-    conda deactivate
-    conda activate simurg_plotter
+В функции loop() мы используем метод getKey() класса Keypad для считывания нажатых клавиш.
 
-Install `poetry`:
+.. code-block:: cpp
 
-.. code-block:: bash
+    void loop() {
+    char key = keypad.getKey();
+       if (key) {
+           Serial.println(key);
+       }
+    }
 
-    pip install poetry
+Таким образом благодаря библиотеке Keypad мы получим очень компактный и простой код
 
-Install project:
+Вот полный код программы:
 
-.. code-block:: bash
+.. code-block:: cpp
 
-    poetry install
+    #include <Keypad.h>
+    const byte ROWS = 4;
+    const byte COLS = 4;
+    char keys[ROWS][COLS] = {
+    {'1', '2', '3', 'A'},
+    {'4', '5', '6', 'B'},
+    {'7', '8', '9', 'C'},
+    {'*', '0', '#', 'D'}
+    };
+    byte rowPins[ROWS] = {8, 9, 10, 11};
+    byte colPins[COLS] = {4, 5, 6, 7};
+    Keypad keypad = Keypad(makeKeymap(keys), rowPins, colPins, ROWS, COLS);
+    void setup() {
+    Serial.begin(9600);
+    keypad.begin(makeKeymap(keys));
+    }
+    void loop() {
+    char key = keypad.getKey();
+       if (key) {
+           Serial.println(key);
+       }
+    }
 
-Support
--------
 
-If you are having issues, please let us know.
-We have a mailing list located at: artemvesnin@gmail.com
 
-License
--------
 
-The project is licensed under the MIT license.
