@@ -73,8 +73,8 @@
 
 .. code-block:: cpp
 
-    byte rowPins[ROWS] = {8, 9, 10, 11};
-    byte colPins[COLS] = {4, 5, 6, 7};
+    byte rowPins[ROWS] = {11, 10, 9, 8};
+    byte colPins[COLS] = {7, 6, 5, 4};
 
 Эти массивы используются для настройки клавиатуры и указания Arduino, какие пины используются для считывания нажатий клавиш. Библиотека Keypad использует эту информацию для сканирования строк и столбцов, чтобы определить, какая кнопка была нажата.
 
@@ -119,8 +119,8 @@
     {'7', '8', '9', 'C'},
     {'*', '0', '#', 'D'}
     };
-    byte rowPins[ROWS] = {8, 9, 10, 11};
-    byte colPins[COLS] = {4, 5, 6, 7};
+    byte rowPins[ROWS] = {11, 10, 9, 8};
+    byte colPins[COLS] = {7, 6, 5, 4};
     Keypad keypad = Keypad(makeKeymap(keys), rowPins, colPins, ROWS, COLS);
     void setup() {
     Serial.begin(9600);
