@@ -257,3 +257,15 @@ buttons: содержит символы, соответствующие каж�
 .. image:: tinker/9.png
     :alt: Global map with sparse data
     :width: 600
+
+Источники
+----------
+"Как сделать клавиатуру — Матрица" - URL: https://habr.com/ru/articles/394585/
+
+"Ардуино и клавиатуры (полный гайд)" - URL: https://habr.com/ru/articles/460409/
+
+"Матричная 4х4 кнопочная клавиатура для Ардуино" - URL: https://www.youtube.com/watch?v=Jds1KQVKv_w
+
+"Аналоговая клавиатура на arduino. 9 кнопок на 1 пин в FLProg" - URL: https://www.youtube.com/watch?v=ZYbL6byz7YU
+
+"Сток Ардуино" - URL: https://carposting.ru/dve-knopki-arduino/
