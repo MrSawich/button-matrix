@@ -35,8 +35,28 @@
 
 В этой есть 4 строки (ряда) и 4 столбца. Каждая кнопка находится на пересечении строки и столбца. Чтобы подключить эту клавиатуру к Arduino UNO, вам нужно будет подключить строки к пинам цифрового вывода Arduino, а столбцы - к пинам входа.
 
-Подключите строки клавиатуры (Row 1 - Row 4) к пинам цифрового вывода Arduino, например, к пинам 8, 9, 10, 11.
-Подключите столбцы клавиатуры (Column 1 - Column 4) к пинам входа Arduino, например, к пинам 4, 5, 6, 7.
+Подключите строки и столбцы клавиатуры к следующим пинам Arduino:
+
+Строки:
+
+Row 1 -> Пин 11
+
+Row 2 -> Пин 10
+
+Row 3 -> Пин 9
+
+Row 4 -> Пин 8
+
+
+Столбцы:
+
+Col 1 -> Пин 7
+
+Col 2 -> Пин 6
+
+Col 3 -> Пин 5
+
+Col 4 -> Пин 4
 
 .. image:: tinker/6.png
     :alt: Global map with sparse data
@@ -111,28 +131,28 @@
 .. code-block:: cpp
 
     #include <Keypad.h>
-const byte ROWS = 4;
-const byte COLS = 4;
-char keys[ROWS][COLS] = {
-  {'1', '2', '3', 'A'},
-  {'4', '5', '6', 'B'},
-  {'7', '8', '9', 'C'},
-  {'*', '0', '#', 'D'}
-};
-byte rowPins[ROWS] = {11, 10, 9, 8};
-byte colPins[COLS] = {7, 6, 5, 4};
-Keypad keypad = Keypad(makeKeymap(keys), rowPins, colPins, ROWS, COLS);
-
-void setup() {
-  Serial.begin(9600);
-}
-
-void loop() {
-  char key = keypad.getKey();
-  if (key) {
-    Serial.println(key);
-  }
-}
+    const byte ROWS = 4;
+    const byte COLS = 4;
+    char keys[ROWS][COLS] = {
+      {'1', '2', '3', 'A'},
+      {'4', '5', '6', 'B'},
+      {'7', '8', '9', 'C'},
+      {'*', '0', '#', 'D'}
+    };
+    byte rowPins[ROWS] = {11, 10, 9, 8};
+    byte colPins[COLS] = {7, 6, 5, 4};
+    Keypad keypad = Keypad(makeKeymap(keys), rowPins, colPins, ROWS, COLS);
+    
+    void setup() {
+      Serial.begin(9600);
+    }
+    
+    void loop() {
+      char key = keypad.getKey();
+      if (key) {
+        Serial.println(key);
+      }
+    }
 
 
 Матричная клавиатура 2x2
@@ -148,9 +168,25 @@ void loop() {
 
 При сборке будем отсылаться к изображению стандартной схемы матричной клавиатуры, чтобы получить вот такой результат:
 
+Подключите строки и столбцы клавиатуры к следующим пинам Arduino:
+
+Строки:
+
+Row 1 -> Пин 5
+
+Row 2 -> Пин 4
+
+Столбцы:
+
+Col 1 -> Пин 3
+
+Col 2 -> Пин 2
+
 .. image:: tinker/7.png
     :alt: Global map with sparse data
     :width: 600
+
+Таким образом у нас должна получится следующая схема. Такое подключение позволяет опрашивать состояние кнопок и отправлять их значения на последовательный порт для последующего анализа.
 
 Код программы
 -------------
